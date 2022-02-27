@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import pandas as pd
@@ -59,39 +60,46 @@ def get_info(el):
 
 # el = elements[0]
 
-list_of_dicts = []
+def scrape_charts(output_filename):
+    list_of_dicts = []
+
+    driver = webdriver.Firefox()
+    driver.get(get_url_singles(initial_date))
+    input() #wait for user to accept cookies and refuse mailing list
+
+    for year, week, date in weeks(initial_date, max_date):
+        while True:
+            try:
+                driver.get(get_url_singles(date))
+            except TimeoutException:
+                pass
+            else:
+                break
+            finally:
+                sleep(2)
+        # sleep(2)
+        table = driver.find_element_by_css_selector("table.chart-positions")
+        elements = table.find_elements_by_tag_name("tr") #table row
+        for el in elements:
+            el_cls = el.get_attribute("class").split()
+            if "headings" in el_cls or "mobile-actions" in el_cls or "actions-view" in el_cls: continue
+            try:
+                values = get_info(el)
+            except NoSuchElementException:
+                continue
+            values["year"] = year
+            values["week"] = week
+            values["date"] = date
+            list_of_dicts.append(values)
+    driver.close()
+
+    df = pd.DataFrame(list_of_dicts)
+    df.to_csv("./english_charts.csv")
 
 
-driver = webdriver.Firefox()
-driver.get(get_url_singles(initial_date))
-input() #wait for user to accept cookies and refuse mailing list
-
-for year, week, date in weeks(initial_date, max_date):
-    while True:
-        try:
-            driver.get(get_url_singles(date))
-        except TimeoutException:
-            pass
-        else:
-            break
-        finally:
-            sleep(2)
-    # sleep(2)
-    table = driver.find_element_by_css_selector("table.chart-positions")
-    elements = table.find_elements_by_tag_name("tr") #table row
-    for el in elements:
-        el_cls = el.get_attribute("class").split()
-        if "headings" in el_cls or "mobile-actions" in el_cls or "actions-view" in el_cls: continue
-        try:
-            values = get_info(el)
-        except NoSuchElementException:
-            continue
-        values["year"] = year
-        values["week"] = week
-        values["date"] = date
-        list_of_dicts.append(values)
-driver.close()
-
-df = pd.DataFrame(list_of_dicts)
-df.to_csv("./english_charts.csv")
-
+if __name__ == "__main__":
+    parser = ArgumentParser("scrape the uk billboards")
+    parser.add_argument("filename", default="data/uk_charts.csv", type=str,
+                        help="the output filename")
+    args = parser.parse_args()
+    scrape_charts(args.filename)

@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
@@ -32,36 +33,43 @@ def get_info(el):
     )
 
 
+def scrape_charts(output_filename="data/french_charts.csv"):
+    # el = elements[0]
 
-# el = elements[0]
-
-list_of_dicts = []
+    list_of_dicts = []
 
 
-driver = webdriver.Firefox()
-driver.get(get_url_singles(min_year, first_week))
-input() #wait for user to accept cookies
-for year in range(min_year, max_year + 1):
-    for week in range(1, max_week + 1): 
-        if year == min_year and week < first_week:
-            continue
-        while True:
-            try:
-                driver.get(get_url_singles(year, week))
-            except TimeoutException:
-                pass
-            else:
-                break
-            finally:
-                sleep(2)
-        # sleep(2)
-        elements = driver.find_elements_by_css_selector("div.b572")
-        for el in elements:
-            values = get_info(el)
-            values["year"] = year
-            values["week"] = week
-            list_of_dicts.append(values)
-driver.close()
+    driver = webdriver.Firefox()
+    driver.get(get_url_singles(min_year, first_week))
+    input() #wait for user to accept cookies
+    for year in range(min_year, max_year + 1):
+        for week in range(1, max_week + 1): 
+            if year == min_year and week < first_week:
+                continue
+            while True:
+                try:
+                    driver.get(get_url_singles(year, week))
+                except TimeoutException:
+                    pass
+                else:
+                    break
+                finally:
+                    sleep(2)
+            # sleep(2)
+            elements = driver.find_elements_by_css_selector("div.b572")
+            for el in elements:
+                values = get_info(el)
+                values["year"] = year
+                values["week"] = week
+                list_of_dicts.append(values)
+    driver.close()
 
-df = pd.DataFrame(list_of_dicts)
-df.to_csv("./french_charts.csv")
+    df = pd.DataFrame(list_of_dicts)
+    df.to_csv(output_filename)
+
+if __name__ == "__main__":
+    parser = ArgumentParser("scrape the french billboards")
+    parser.add_argument("filename", default="data/french_charts.csv", type=str,
+                        help="the output filename")
+    args = parser.parse_args()
+    scrape_charts(args.filename)
