@@ -1,3 +1,6 @@
+"""
+Web crawling script for the uk charts
+"""
 from argparse import ArgumentParser
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
@@ -16,6 +19,12 @@ max_date = date(2021, 12, 31)
 
 
 def weeks(initial_date, max_date):
+    """
+    iterator over the weeks (as datetime.date) from initial_date to max_date
+
+    :param initial_date date:
+    :param max_date date:
+    """
     dt = initial_date
     while dt <= max_date:
         year, week, weekday = dt.isocalendar()
@@ -43,10 +52,20 @@ def selenium_http_request(driver, address):
 
 #official publisher of french charts
 def get_url_singles(d : date):
+    """
+    gives you the url for the uk billboards for given date
+
+    :param d date:
+    """
     return f"https://www.officialcharts.com/charts/singles-chart/{d.year:04}{d.month:02}{d.day:02}/7501"
 
 
 def get_info(el):
+    """
+    extracts info from a html row extracted from the billboard page
+
+    :param el: selenium element
+    """
     classes = ["position", "last-week", "title", "artist", "label-cat"]
     values = {cl: el.find_element_by_class_name(cl).text for cl in classes}
     tds = el.find_elements_by_tag_name("td")
@@ -61,6 +80,11 @@ def get_info(el):
 # el = elements[0]
 
 def scrape_charts(output_filename):
+    """
+    Scrapes the uk charts, and puts them into output_filename as csv data
+
+    :param output_filename str: output file name.
+    """
     list_of_dicts = []
 
     driver = webdriver.Firefox()
@@ -94,7 +118,7 @@ def scrape_charts(output_filename):
     driver.close()
 
     df = pd.DataFrame(list_of_dicts)
-    df.to_csv("./english_charts.csv")
+    df.to_csv(output_filename)
 
 
 if __name__ == "__main__":

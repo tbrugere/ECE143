@@ -1,3 +1,6 @@
+"""
+Web crawling script for the french charts
+"""
 from argparse import ArgumentParser
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -18,6 +21,12 @@ max_week=52
 
 #official publisher of french charts
 def get_url_singles(year_n:int, week_n:int):
+    """
+    gives you the url for the french billboards for given week
+
+    :param year_n int: year
+    :param week_n int: week number (starting from week 1, according to the iso calendar)
+    """
     assert min_year <= year_n <= max_year
     assert 1 <= week_n <= max_week
     year_n = year_n % 100
@@ -25,6 +34,11 @@ def get_url_singles(year_n:int, week_n:int):
 
 
 def get_info(el):
+    """
+    extracts info from a html row extracted from the billboard page
+
+    :param el: selenium element
+    """
     return dict(
     position = int(el.find_element_by_class_name("c1_td2").text),
     evol = el.find_element_by_class_name("c1_td3").find_element_by_tag_name("font").text,
@@ -34,6 +48,11 @@ def get_info(el):
 
 
 def scrape_charts(output_filename="data/french_charts.csv"):
+    """
+    Scrapes the french charts, and puts them into output_filename as csv data
+
+    :param output_filename str: output file name.
+    """
     # el = elements[0]
 
     list_of_dicts = []
