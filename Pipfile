@@ -9,6 +9,9 @@ pandas = "*"
 numpy = "*"
 ipython = "*"
 selenium = "*"
+unidecode = "*"
+jupyter = "*"
+ipykernel = "*"
 
 [dev-packages]
 sphinx = "*"

@@ -38,6 +38,9 @@ autodoc: docs-dir dev-deps
 docs/source/README.md:
 	cp ./README.md docs/source/README.md
 
+install-kernel: deps
+	pipenv run python -m ipykernel install --user --name=ECE143-project-env
+
 nbconvert: docs-dir dev-deps
 # 	pipenv run jupyter-nbconvert --to rst tests/Process.ipynb  --output-dir ./docs/source
 # 	sed -i "/^\s*INFO:/d" ./docs/source/Process.rst #remove the innumerable INFO: lines
