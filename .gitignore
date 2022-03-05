@@ -1,4 +1,8 @@
 # Big data
+data/msd_summary_file.h5
+data/spotify.csv
+data/spotify_new.csv
+
 
 # Selenium logs
 geckodriver.log

@@ -19,6 +19,11 @@ $ pipenv shell
 
 ### Getting the datasets.
 
+tldr; to download the datasets, you can use
+```console
+$ make data
+```
+
 All the necessary datasets go in the `data/` folder.
 
 For convenience, we have included the charts ranking datasets in the folder repository.
