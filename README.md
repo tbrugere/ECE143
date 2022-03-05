@@ -15,14 +15,18 @@ Then to enter the virtual environment, use
 $ pipenv shell
 ```
 
+## Building documentation
+
 ## Running 
 
 ### Getting the datasets.
 
-tldr; to download the datasets, you can use
+**tldr;** to download the datasets, you can use
 ```console
 $ make data
 ```
+
+----
 
 All the necessary datasets go in the `data/` folder.
 

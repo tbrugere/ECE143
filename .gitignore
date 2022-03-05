@@ -3,6 +3,7 @@ data/msd_summary_file.h5
 data/spotify.csv
 data/spotify_new.csv
 
+docs/*
 
 # Selenium logs
 geckodriver.log
