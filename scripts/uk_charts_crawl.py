@@ -122,7 +122,7 @@ def scrape_charts(output_filename):
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser("scrape the uk billboards")
+    parser = ArgumentParser(description="scrape the uk billboards")
     parser.add_argument("filename", default="data/uk_charts.csv", type=str,
                         help="the output filename")
     args = parser.parse_args()

@@ -87,7 +87,7 @@ def scrape_charts(output_filename="data/french_charts.csv"):
     df.to_csv(output_filename)
 
 if __name__ == "__main__":
-    parser = ArgumentParser("scrape the french billboards")
+    parser = ArgumentParser(description="scrape the french billboards")
     parser.add_argument("filename", default="data/french_charts.csv", type=str,
                         help="the output filename")
     args = parser.parse_args()
