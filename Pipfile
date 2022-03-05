@@ -12,6 +12,9 @@ selenium = "*"
 unidecode = "*"
 jupyter = "*"
 ipykernel = "*"
+matplotlib = "*"
+seaborn = "*"
+scikit-learn = "*"
 
 [dev-packages]
 sphinx = "*"
