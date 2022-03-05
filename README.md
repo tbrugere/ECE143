@@ -1,5 +1,4 @@
-# ECE143
-Insights on charts and music datasets
+# ECE143 project: Insights on charts and music datasets
 
 
 ## Installing dependencies
@@ -21,6 +20,16 @@ $ pipenv shell
 
 ## Building documentation
 
+The documentation is built using `sphinx` and `sphinx-autodoc` from the files in `staticdocs/` as well as the docstrings in the python files (and this readme file).
+
+To build it, simply run
+```console
+$ make docgen #this will also fetch the required dependencies such as sphinx
+```
+The documentation will then be available in the `doc/_build/` folder
+
+**Note**: if you are regenerating the documentation after having already built it, you may want to run `make clean` beforehand
+
 ## Running 
 
 ### Getting the datasets.
@@ -30,7 +39,6 @@ $ pipenv shell
 ```console
 $ make data
 ```
-
 ----
 
 All the necessary datasets go in the `data/` folder.
@@ -38,33 +46,7 @@ All the necessary datasets go in the `data/` folder.
 For convenience, we have included the charts ranking datasets in the folder repository. But the *spotify* and *million songs* dataset are too big and must be downloaded separately using aforementioned command.
 
 If needed, the scripts to scrape the French and English datasets are located in the `scripts/` folder.
-They are launched using the following commands
-
-```console
-$ python scripts/fr_charts_crawl.py --help
-
-usage: fr_charts_crawl.py [-h] filename
-
-scrape the french billboards
-
-positional arguments:
-  filename    the output filename
-
-options:
-  -h, --help  show this help message and exit
-  
-$ python scripts/uk_charts_crawl.py
-
-usage: uk_charts_crawl.py [-h] filename
-
-scrape the uk billboards
-
-positional arguments:
-  filename    the output filename
-
-options:
-  -h, --help  show this help message and exit
-```
+To learn more about them, read the documentation in the [scripts package](scripts) (link will only work if you are reading this in the documentation).
 
 
 ## Project structure

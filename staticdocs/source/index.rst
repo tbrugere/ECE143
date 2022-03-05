@@ -1,9 +1,14 @@
 Welcome to ECE143 project’s documentation!
-==================================
+==========================================
 
 .. toctree::
    :maxdepth: 3
-   :caption: Contents:
+   :caption: Contents
+   :name: mastertoc
+   
+   README.md
+   scripts
+
 
 
 

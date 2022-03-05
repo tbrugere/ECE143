@@ -15,6 +15,7 @@ sphinx = "*"
 sphinx-argparse = "*"
 sphinxcontrib-bibtex = "*"
 sphinx-rtd-theme = "*"
+recommonmark = "*"
 
 [requires]
 python_version = "3.10"

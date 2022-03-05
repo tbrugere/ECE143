@@ -120,10 +120,14 @@ def scrape_charts(output_filename):
     df = pd.DataFrame(list_of_dicts)
     df.to_csv(output_filename)
 
-
-if __name__ == "__main__":
+def get_parser():
+    """returns this file’s argument parser"""
     parser = ArgumentParser(description="scrape the uk billboards")
     parser.add_argument("filename", default="data/uk_charts.csv", type=str,
                         help="the output filename")
+    return parser
+
+if __name__ == "__main__":
+    parser = get_parser()
     args = parser.parse_args()
     scrape_charts(args.filename)

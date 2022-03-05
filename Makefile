@@ -27,7 +27,7 @@ data/french_charts.csv:
 docgen: docs dev-deps
 	pipenv run  $(MAKE) -C docs html
 
-docs: docs-dir autodoc nbconvert
+docs: docs-dir autodoc docs/source/README.md nbconvert
 
 docs-dir: staticdocs
 	cp -Rf staticdocs docs
@@ -35,7 +35,10 @@ docs-dir: staticdocs
 autodoc: docs-dir dev-deps
 	pipenv run sphinx-apidoc -f -e -o docs/source scripts
 
-# nbconvert: docs-dir dev-deps
+docs/source/README.md:
+	cp ./README.md docs/source/README.md
+
+nbconvert: docs-dir dev-deps
 # 	pipenv run jupyter-nbconvert --to rst tests/Process.ipynb  --output-dir ./docs/source
 # 	sed -i "/^\s*INFO:/d" ./docs/source/Process.rst #remove the innumerable INFO: lines
 
