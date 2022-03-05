@@ -15,6 +15,7 @@ ipykernel = "*"
 matplotlib = "*"
 seaborn = "*"
 scikit-learn = "*"
+statsmodels = "*"
 
 [dev-packages]
 sphinx = "*"
