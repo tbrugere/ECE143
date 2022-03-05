@@ -8,9 +8,13 @@ h5py = "*"
 pandas = "*"
 numpy = "*"
 ipython = "*"
+selenium = "*"
 
 [dev-packages]
 sphinx = "*"
+sphinx-argparse = "*"
+sphinxcontrib-bibtex = "*"
+sphinx-rtd-theme = "*"
 
 [requires]
 python_version = "3.10"

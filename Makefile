@@ -3,12 +3,11 @@ spotify_url="https://transfer.sh/DBb1S7/spotify_new.txt"
 
 all: docgen data
 
-# deps:
-	# pipenv install
+deps:
+	pipenv install
 
-# dev-deps: 
-	# pipenv install --dev
-	#
+dev-deps: 
+	pipenv install --dev
 	
 data: data/spotify_new.csv data/msd_summary_file.h5 data/UK_charts.csv data/french_charts.csv data/billboard_data.csv
 

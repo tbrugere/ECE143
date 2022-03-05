@@ -9,6 +9,10 @@ In the project repo, just type
 ```console
 $ pipenv install
 ```
+Alternatively you can use the makefile
+```console
+$ make deps
+```
 
 Then to enter the virtual environment, use
 ```console
@@ -22,6 +26,7 @@ $ pipenv shell
 ### Getting the datasets.
 
 **tldr;** to download the datasets, you can use
+
 ```console
 $ make data
 ```
@@ -30,7 +35,7 @@ $ make data
 
 All the necessary datasets go in the `data/` folder.
 
-For convenience, we have included the charts ranking datasets in the folder repository.
+For convenience, we have included the charts ranking datasets in the folder repository. But the *spotify* and *million songs* dataset are too big and must be downloaded separately using aforementioned command.
 
 If needed, the scripts to scrape the French and English datasets are located in the `scripts/` folder.
 They are launched using the following commands
