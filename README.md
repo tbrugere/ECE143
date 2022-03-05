@@ -48,6 +48,19 @@ For convenience, we have included the charts ranking datasets in the folder repo
 If needed, the scripts to scrape the French and English datasets are located in the `scripts/` folder.
 To learn more about them, read the documentation in the [scripts package](scripts) (link will only work if you are reading this in the documentation).
 
+### Running the project
+
+The main code is located in the `notebooks/ECE143Project.ipynb` jupyter notebook.
+
+To run it, start jupyter notebook, either directly in the virtualenv with
+```console
+$ pipenv run jupyter notebook notebooks/ECE143Project.ipynb
+```
+
+or install the virtualenv as a kernelspec in your regular jupyter installation with
+```console
+$ make install-kernel
+```
 
 ## Project structure
 
