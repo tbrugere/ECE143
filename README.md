@@ -65,3 +65,6 @@ $ make install-kernel
 ## Project structure
 
 - the `data/` folder contains the several datasets
+- the `scripts/` package contains the scraping scripts
+- the `utils/` package contains various utility functions used in the notebook
+- the `notebooks/` folder contains the main notebook of the repo

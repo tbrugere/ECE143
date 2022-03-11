@@ -34,6 +34,7 @@ docs-dir: staticdocs
 
 autodoc: docs-dir dev-deps
 	pipenv run sphinx-apidoc -f -e -o docs/source scripts
+	pipenv run sphinx-apidoc -f -e -o docs/source utils
 
 docs/source/README.md:
 	cp ./README.md docs/source/README.md

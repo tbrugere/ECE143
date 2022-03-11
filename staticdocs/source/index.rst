@@ -8,6 +8,7 @@ Welcome to ECE143 project’s documentation!
    
    README.md
    scripts
+   utils
 
 
 
